@@ -1,3 +1,4 @@
+//new code
 import { useState, useEffect, useRef } from 'react';
 import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
@@ -99,19 +100,18 @@ const MapContainer = (props) => {
 };
 
 
+  const Banner = () => {
+    return (
+      <div>
+        <MapContainer
+          google={window.google}
+          apiKey="AIzaSyA3gLkRmq1HhgX8zBvqonlKvcpWlRV9s5A"
+        />
+      </div>
+    );
+  };
 
-const Banner = () => {
-  return (
-    <div>
-      <MapContainer
-        google={window.google}
-        apiKey= "AIzaSyDapmAwcwfnRyhDjFp2fQStS-fhydVVZo4"
-      />
-    </div>
-  );
-};
-
-export default GoogleApiWrapper({
-  apiKey:  'AIzaSyDapmAwcwfnRyhDjFp2fQStS-fhydVVZo4'
-})(Banner);
+  export default GoogleApiWrapper({
+    apiKey: 'AIzaSyA3gLkRmq1HhgX8zBvqonlKvcpWlRV9s5A'
+  })(Banner);
 

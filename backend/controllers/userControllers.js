@@ -26,7 +26,7 @@ module.exports = {
             const accessToken = jwt.sign(
               {
                 id: userid,
-              username:response.username,
+                username: response.username,
                 email: response.email,
               },
               process.env.JWT,
@@ -46,42 +46,43 @@ module.exports = {
 
   },
 
-
   postLogin: function (req, res) {
     try {
-
-      userHelpers.doLogin(req.body).then((response) => {
-
-        if (response.status) {
-          userid = response?.user?._id
-
-
-          const accessToken = jwt.sign(
-            {
-              id: userid,
-              username:response.username,
-              email: response.email
-            },
-            process.env.JWT,
-            { expiresIn: "7d" });
-          res.cookie("accessToken", accessToken,
-            { withCredentials: true, httpOnly: true, secure: false }).status(200).json(response)
-
-        }
-
-        else {
-          console.log("-----error---");
-        }
-      })
+      userHelpers.doLogin(req.body)
+        .then((response) => {
+          if (response.status) {
+            userid = response?.user?._id;
+            const accessToken = jwt.sign(
+              {
+                id: userid,
+                username: response.username,
+                email: response.email,
+              },
+              process.env.JWT,
+              { expiresIn: "7d" }
+            );
+            res
+              .cookie("accessToken", accessToken, {
+                withCredentials: true,
+                httpOnly: true,
+                secure: false,
+              })
+              .status(200)
+              .json(response);
+          } else {
+            console.log("Login error");
+            res.status(400).json({ error: "Invalid credentials" }); // Return error response
+          }
+        })
+        .catch((error) => {
+          console.log("Catch error", error);
+          res.status(500).json({ error: error }); // Return error response
+        });
+    } catch (e) {
+      console.log("Try-Catch error", e);
+      res.status(500).json({ error: e }); // Return error response
     }
-    catch (e) {
-      console.log(e);
-    }
-
   },
-
-
-
 
 
 

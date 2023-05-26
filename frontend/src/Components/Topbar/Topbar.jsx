@@ -22,7 +22,10 @@ function Topbar() {
         <div style={{ backgroundColor: 'black', padding: '10px' }}>
             <Stack direction="row" justifyContent="space-between" gap={3}>
                 {/* <LocalTaxiIcon style={{ color: 'yellow' }} /> */}
-                <img alt="logo" style={{ width: '40px', height: '40px', cursor: 'pointer' }} onClick={() => { navigate('/') }} src={mappointlogo}></img>
+                <img alt="logo" style={{ width: '40px', height: '40px', cursor: 'pointer' }} onClick={() => {
+                    window.location.reload(false);
+                    navigate('/')
+                }} src={mappointlogo}></img>
                 {/* <Typography style={{ color: 'white', marginTop: '10px' }} >Hi {currentUser?.user?.username}</Typography> */}
                 <Typography style={{ color: 'white', marginTop: '10px' }}>
                     Hi {currentUser?.user?.username.charAt(0).toUpperCase() + currentUser?.user?.username.slice(1)}

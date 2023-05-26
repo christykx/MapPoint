@@ -55,7 +55,8 @@ function Login() {
     login(details).then((response) => {
       navigate('/')
     }).catch((err) => {
-      console.log("-----login errrrr message---", err);
+      console.log("-----login errrrr message---", err?.response?.data?.error);
+      alert( err.response?.data.error.error)
     })
 
 
@@ -72,14 +73,6 @@ function Login() {
           sm={4}
           md={4}
 
-        //   sx={{
-        //     backgroundImage: 'url(b.jpg)',
-        //     backgroundRepeat: 'no-repeat',
-        //     backgroundColor: (t) =>
-        //       t.palette.mode === 'light' ? t.palette.grey[50] : t.palette.grey[900],
-        //     backgroundSize: 'cover',
-        //     backgroundPosition: 'center',
-        //   }}
         />
         <Grid item xs={12} sx={{backgroundColor:'white',opacity:'0.8',marginTop:'15px',height:'80vh'}}  sm={4} md={4} component={Paper} elevation={6} square>
           <Box

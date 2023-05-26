@@ -25,9 +25,23 @@ function Register() {
     const [password, setpassword] = useState('');
     const [userid, setuserid] = useState('');
 
+    const [emailError, setEmailError] = useState('');
+
+    const validateEmail = (email) => {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email);
+    };
+
+
+
 
     const handleSubmit = (event) => {
         event.preventDefault();
+        // Check if email is valid
+        if (!validateEmail(email)) {
+            setEmailError('Please enter a valid email address');
+            return;
+        }
 
         if (Object.keys(username, email, password).length === 0) {
             alert("Please fill the form properly!");
@@ -112,9 +126,10 @@ function Register() {
                                 autoFocus
                             />
 
-                            {(Object.keys(username).length === 0) &&
+                            {username.trim() === '' && username.length > 0 && (
                                 <p style={{ color: 'red', fontSize: '12px' }}>Please enter your username</p>
-                            }
+                            )}
+
                             <TextField
                                 margin="normal"
                                 required
@@ -126,9 +141,10 @@ function Register() {
                                 autoComplete="email"
                                 autoFocus
                             />
-                            {(Object.keys(email).length === 0) &&
-                                <p style={{ color: 'red', fontSize: '12px' }}>Please enter your email id</p>
-                            }
+
+                            {emailError && (
+                                <p style={{ color: 'red', fontSize: '12px' }}>{emailError}</p>
+                            )}
                             <TextField
                                 margin="normal"
                                 required
@@ -140,10 +156,9 @@ function Register() {
                                 id="password"
                                 autoComplete="current-password"
                             />
-                            {(Object.keys(password).length === 0) &&
+                            {password.trim() === '' && password.length > 0 && (
                                 <p style={{ color: 'red', fontSize: '12px' }}>Please enter your password</p>
-                            }
-
+                            )}
                             <Button
                                 type="submit"
                                 fullWidth
